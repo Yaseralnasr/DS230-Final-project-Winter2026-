@@ -596,6 +596,255 @@ The analysis showed that:
 * KNN and Decision Tree exhibited greater prediction dispersion and lower predictive accuracy.
 
 This visualization provided insight into each model’s prediction quality and potential bias.
+The objective of this project is to develop and evaluate multiple machine learning models for predicting house prices. Several regression algorithms were implemented, tuned, and compared to identify the model that provides the highest prediction accuracy. The workflow included data preprocessing, exploratory data analysis, model training, hyperparameter optimization, performance evaluation, and model deployment preparation.
+The dataset was loaded using Pandas and prepared for machine learning analysis. The preprocessing stage included:
+
+Importing required libraries such as Pandas, NumPy, Matplotlib, Seaborn, and Scikit-learn.
+Separating the dataset into:
+Features (X)
+Target variable (y), representing house prices.
+Splitting the dataset into:
+Training set (80%)
+Testing set (20%)
+Applying feature scaling where required using StandardScaler.
+
+This step ensured that the data was properly structured and ready for model training.
+
+3. Exploratory Data Analysis (EDA)
+
+To better understand the dataset, exploratory analysis was performed.
+
+Correlation Analysis
+
+A correlation heatmap was generated using Seaborn to visualize relationships among numerical features.
+
+Findings:
+Several features showed positive correlations with house prices.
+Highly correlated features were identified, helping in feature selection.
+The heatmap provided insights into which variables are likely to have stronger predictive power.
+
+This analysis served as the foundation for selecting appropriate machine learning techniques.
+
+4. Linear Regression Model
+
+A baseline Linear Regression model was trained and evaluated.
+
+Procedure:
+Train the model using the training data.
+Predict house prices on the test data.
+Evaluate performance using the R² metric.
+Purpose:
+
+Linear Regression served as a benchmark against which more advanced models could be compared.
+
+Outcome:
+
+The model achieved acceptable performance but was limited in capturing complex nonlinear relationships within the dataset.
+
+5. Ridge Regression
+
+Ridge Regression was implemented to reduce overfitting through L2 regularization.
+
+Hyperparameter Tuning:
+
+Multiple alpha values were tested:
+
+0.001
+0.01
+0.1
+1
+10
+100
+Results:
+Best Alpha: 100.0
+Best R² Score: 0.1193
+Interpretation:
+
+Increasing the regularization strength improved model stability and slightly enhanced generalization performance.
+
+6. ElasticNet Regression
+
+ElasticNet combines both L1 and L2 regularization techniques.
+
+Hyperparameters Evaluated:
+
+Alpha values:
+
+0.001
+0.01
+0.1
+
+L1 Ratios:
+
+0.2
+0.5
+0.8
+1.0
+Grid Search Results:
+Best Alpha: 0.1
+Best L1 Ratio: 0.2
+Best R² Score: 0.1356
+Heatmap Analysis:
+
+The heatmap showed how performance changed with different alpha and L1 ratio combinations.
+
+Interpretation:
+
+ElasticNet outperformed both Linear Regression and Ridge Regression by balancing coefficient shrinkage and feature selection.
+
+7. Random Forest Regression
+
+Random Forest Regression was implemented to capture nonlinear relationships and interactions between variables.
+
+Hyperparameter Tuning
+
+GridSearchCV was used to optimize:
+
+Number of trees (n_estimators)
+Maximum tree depth (max_depth)
+Minimum samples split
+Minimum samples leaf
+Best Parameters:
+n_estimators = 100
+max_depth = 10
+min_samples_split = 10
+min_samples_leaf = 2
+Performance:
+Best Cross-Validation R² = 0.1519
+Feature Importance Analysis
+
+The top influential features included:
+
+liv_area_sqft
+vac_liv_area
+bath_full
+lot_sqft
+life_century_ratio
+unit_sf_ratio
+bed_rooms
+levyrate_density
+req_rating_ratio
+year_with
+Interpretation:
+
+Random Forest successfully identified the most influential predictors and demonstrated stronger predictive capability than the linear models.
+
+8. XGBoost Regression
+
+XGBoost was implemented as an advanced gradient boosting algorithm.
+
+Hyperparameters Tuned:
+learning_rate
+max_depth
+n_estimators
+subsample
+colsample_bytree
+Best Parameters:
+learning_rate = 0.1
+max_depth = 8
+n_estimators = 300
+subsample = 0.8
+colsample_bytree = 0.8
+Performance:
+Best Cross-Validation R² = 0.1593
+Visualization:
+
+A scatter plot was generated showing the relationship between:
+
+Learning Rate
+Maximum Depth
+R² Score
+Interpretation:
+
+XGBoost achieved the highest predictive performance among all tested models.
+
+9. Learning Curve Analysis
+
+Learning curves were generated for:
+
+XGBoost
+Random Forest
+XGBoost Learning Curve
+
+Observations:
+
+Training score decreased gradually as more data was added.
+Validation score increased slightly.
+The gap between training and validation performance narrowed.
+
+Interpretation:
+The model generalized reasonably well and benefited from larger training samples.
+
+Random Forest Learning Curve
+
+Observations:
+
+Training score remained very high.
+Validation score improved only slightly.
+A noticeable gap existed between training and validation performance.
+
+Interpretation:
+Random Forest showed signs of mild overfitting compared with XGBoost.
+
+10. Final Model Comparison
+
+The tuned models were compared using MAE, RMSE, and R².
+
+Model	MAE	RMSE	R²
+Ridge Regression	0.4035	0.5379	0.1190
+Lasso Regression	0.4035	0.5379	0.1190
+ElasticNet	0.4011	0.5326	0.1356
+Random Forest	0.4016	0.5288	0.1519
+XGBoost	0.4000	0.5268	0.1593
+Ranking of Models
+XGBoost (R² = 0.1593)
+Random Forest (R² = 0.1519)
+ElasticNet (R² = 0.1356)
+Ridge Regression (R² = 0.1190)
+Lasso Regression (R² = 0.1190)
+Key Finding
+
+XGBoost achieved the best overall performance with:
+
+Lowest prediction error
+Highest R² score
+Better generalization than competing models
+11. Model Saving and Exporting Results
+
+The final deployment stage included:
+
+Model Persistence
+
+The best-performing XGBoost model was saved using Joblib:
+
+File: best_model.pkl
+Results Export
+
+Prediction results and performance metrics were exported to CSV files:
+
+model_results_summary.csv
+prediction_results.csv
+Stored Metrics
+MAE = 0.4000
+RMSE = 0.5268
+R² = 0.1593
+
+This ensures reproducibility and enables future deployment without retraining the model.
+
+12. Conclusion
+
+This project successfully developed and evaluated multiple machine learning approaches for house price prediction. Through systematic preprocessing, exploratory analysis, hyperparameter tuning, and model comparison, XGBoost emerged as the most effective algorithm.
+
+Final Best Model:
+
+XGBoost Regressor
+
+Best Performance:
+MAE = 0.4000
+RMSE = 0.5268
+R² = 0.1593
+
+The results demonstrate that ensemble-based machine learning methods, particularly XGBoost and Random Forest, outperform traditional linear regression techniques when modeling complex housing market data.
 
 ---
 
