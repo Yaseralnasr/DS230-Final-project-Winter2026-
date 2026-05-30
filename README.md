@@ -479,5 +479,190 @@ log_kw_max_avg
 LDA_01
 LDA_00
 
+
+
+# Machine Learning Regression Models Evaluation Report
+
+## 1. Data Loading and Preprocessing
+
+The analysis began by importing the required Python libraries for data processing, visualization, machine learning, and model evaluation. The dataset was loaded from the CSV file, while the selected features were imported from a separate text file. Missing values were handled by replacing them with zeros to ensure data consistency.
+
+The feature matrix (X) and target variable (y) were then defined. Subsequently, the dataset was divided into training (80%) and testing (20%) subsets using a fixed random state to ensure reproducibility. Feature scaling was applied using StandardScaler to normalize the input variables before model training.
+
+**Dataset Summary:**
+
+* Total features: 68
+* Training samples: 30,769
+* Testing samples: 7,693
+* Target mean: 7.470
+* Target standard deviation: 0.925
+
+---
+
+## 2. Model Definition and Configuration
+
+Nine regression models were defined and configured to evaluate different machine learning approaches:
+
+1. Linear Regression
+2. Ridge Regression
+3. Lasso Regression
+4. ElasticNet Regression
+5. K-Nearest Neighbors (KNN)
+6. Support Vector Regression (SVR)
+7. Decision Tree Regression
+8. Random Forest Regression
+9. Extreme Gradient Boosting (XGBoost)
+
+These models represent linear, regularized, distance-based, tree-based, and ensemble learning techniques.
+
+---
+
+## 3. Model Evaluation Function
+
+A custom evaluation function was developed to automate model assessment. The function trains each model and calculates multiple performance metrics:
+
+* Mean Absolute Error (MAE)
+* Mean Squared Error (MSE)
+* Root Mean Squared Error (RMSE)
+* Coefficient of Determination (R²)
+* Adjusted R²
+
+These metrics provide a comprehensive evaluation of prediction accuracy and model performance.
+
+---
+
+## 4. Cross-Validation Analysis
+
+To assess model robustness and generalization ability, 5-Fold Cross-Validation was performed using R² as the evaluation metric.
+
+### Cross-Validation Results
+
+| Model             | Mean R² |
+| ----------------- | ------- |
+| XGBoost           | 0.1683  |
+| Random Forest     | 0.1526  |
+| Linear Regression | 0.1306  |
+| Ridge             | 0.1308  |
+| Lasso             | 0.1309  |
+| ElasticNet        | 0.1309  |
+| SVR               | 0.1195  |
+| KNN               | 0.0894  |
+| Decision Tree     | 0.0348  |
+
+The results demonstrate that ensemble learning methods achieved the highest predictive performance, with XGBoost outperforming all other models.
+
+---
+
+## 5. Training and Evaluation of Regression Models
+
+Each regression model was trained on the training dataset and evaluated on the testing dataset.
+
+### Performance Metrics
+
+| Model             | R²      | RMSE   | MAE    | Adjusted R² |
+| ----------------- | ------- | ------ | ------ | ----------- |
+| Linear Regression | 0.1251  | 0.8729 | 0.6418 | 0.1173      |
+| Ridge             | 0.1251  | 0.8729 | 0.6418 | 0.1173      |
+| Lasso             | 0.1261  | 0.8724 | 0.6416 | 0.1183      |
+| ElasticNet        | 0.1260  | 0.8725 | 0.6415 | 0.1182      |
+| KNN               | 0.0569  | 0.9863 | 0.6619 | 0.0485      |
+| SVR               | 0.1100  | 0.8804 | 0.6219 | 0.1021      |
+| Decision Tree     | -0.0546 | 0.9074 | 0.6604 | -0.0462     |
+| Random Forest     | 0.1522  | 0.8593 | 0.6361 | 0.1446      |
+| XGBoost           | 0.1577  | 0.8565 | 0.6272 | 0.1501      |
+
+---
+
+## 6. Metrics Comparison Visualization
+
+Several comparative visualizations were generated to compare the regression models based on:
+
+* R² Score (higher is better)
+* RMSE (lower is better)
+* MAE (lower is better)
+
+The visual comparison confirmed that XGBoost consistently achieved the highest R² and lowest prediction error among all evaluated models.
+
+---
+
+## 7. Actual vs Predicted Analysis
+
+Scatter plots comparing actual versus predicted values were generated for all models.
+
+The analysis showed that:
+
+* XGBoost and Random Forest predictions were closer to the ideal prediction line.
+* Linear models demonstrated moderate predictive ability.
+* KNN and Decision Tree exhibited greater prediction dispersion and lower predictive accuracy.
+
+This visualization provided insight into each model’s prediction quality and potential bias.
+
+---
+
+## 8. Residual Analysis
+
+Residual analysis was performed on the best-performing model (XGBoost).
+
+Three diagnostic plots were generated:
+
+1. Residuals vs Predicted Values
+2. Residual Distribution Histogram
+3. Normal Q-Q Plot
+
+### Residual Statistics
+
+* Residual Mean = 0.0191
+* Residual Standard Deviation = 0.8563
+* Heteroscedasticity Correlation = 0.193
+* p-value = 0.0000
+
+The residuals were generally centered around zero, indicating unbiased predictions. However, the heteroscedasticity test suggested some variability in residual variance across prediction levels.
+
+---
+
+## 9. Statistical Comparison Using Wilcoxon Test
+
+To determine whether the performance difference between the two best models was statistically significant, a Wilcoxon Signed-Rank Test was conducted.
+
+### Compared Models
+
+* XGBoost
+* Random Forest
+
+### Results
+
+* Test Statistic = 0.0000
+* p-value = 0.0625
+
+Since the p-value was greater than 0.05, no statistically significant difference was detected between the cross-validation performances of XGBoost and Random Forest.
+
+---
+
+## 10. Model Saving and Export
+
+The final evaluation metrics were exported to:
+
+`regression_metrics.csv`
+
+The best-performing model (XGBoost) was retrained using the full training dataset and saved as:
+
+`best_regression_model.pkl`
+
+This exported model can be loaded later for deployment, prediction, or further analysis without retraining.
+
+---
+
+# Conclusion
+
+This study evaluated nine regression algorithms for predicting log-shares values. Among all tested models, XGBoost achieved the highest predictive performance with:
+
+* R² = 0.1577
+* RMSE = 0.8565
+* MAE = 0.6272
+* Adjusted R² = 0.1501
+
+Cross-validation and statistical testing further confirmed the robustness of XGBoost, although its performance was not significantly different from Random Forest according to the Wilcoxon Signed-Rank Test. Overall, ensemble learning approaches demonstrated superior predictive capability compared to linear, distance-based, and single-tree methods, making XGBoost the most suitable model for this prediction task.
+
+
 The final engineered dataset contained 39,642 observations and 81 columns, including the target variable, and was prepared for the model-building phase.
 
