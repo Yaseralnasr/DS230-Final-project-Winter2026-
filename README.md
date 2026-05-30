@@ -21,8 +21,6 @@ Regression Models
 Regression Model Tuning
 Model Comparison
 Learning Curves Analysis
-SHAP Analysis (Model Explainability)
-Robustness Testing
 
 EDA
 A comprehensive Exploratory Data Analysis (EDA) was conducted on the Online News Popularity dataset to understand its structure, quality, and the factors influencing article popularity.
