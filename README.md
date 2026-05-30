@@ -813,6 +813,18 @@ Better generalization than competing models
 
 The final deployment stage included:
 
+Learning Curves
+
+In this part of the project, I applied Learning Curves to all models to diagnose Overfitting issues and evaluate each model’s performance as the training data size increases. I used a custom plot_learning_curve function based on StratifiedKFold(5) for Classification and KFold(5) for Regression, measuring performance using F1-Score for classification and R² for regression.
+
+I noticed that models such as Random Forest, XGBoost, and SVM RBF suffered from clear Overfitting in their default settings. Therefore, I tuned the Hyperparameters — including reducing max_depth, adding subsample and min_samples_leaf, and increasing n_estimators — which led to a noticeable improvement in the Validation Score and a significant reduction in the Gap. Due to the large dataset size (38,462 rows), I used a sample of 10,000 rows for SVM models to reduce execution time.
+
+By the end of this analysis, the best classification model was the XGBoost Classifier with Validation F1 = 0.6614, and the best regression model was the XGBoost Regressor with Validation R² = 0.1684, while Logistic Regression models showed excellent stability with a near-zero Gap.
+
+
+
+
+
 Model Persistence
 
 The best-performing XGBoost model was saved using Joblib:
