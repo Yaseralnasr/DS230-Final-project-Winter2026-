@@ -12,15 +12,15 @@ It contains articles published by Mashable over approximately two years and incl
 The main objective is to analyze these features and build machine learning models capable of predicting how popular a news article will be based on its characteristics
 
 To achieve this goal, the project was divided into the following sections:
-Exploratory Data Analysis (EDA)
-Data Preprocessing
-Feature Engineering
-Classification Models
-Classification Model Tuning
-Regression Models
-Regression Model Tuning
-Model Comparison
-Learning Curves Analysis
+Exploratory Data Analysis (EDA)   هبه
+Data Preprocessing  ياسر 
+Feature Engineering  ياسر 
+Classification Models هبه 
+Classification Model Tuning  هبه
+Regression Models  ياسر 
+Regression Model Tuning  ياسر 
+Model Comparison  هبه
+Learning Curves Analysis  ياسر 
 
 EDA
 A comprehensive Exploratory Data Analysis (EDA) was conducted on the Online News Popularity dataset to understand its structure, quality, and the factors influencing article popularity.
@@ -936,4 +936,9 @@ To further validate the findings, statistical significance tests were conducted.
 Finally, a bias–variance analysis was performed to assess model generalization. For classification models, the difference between AUC and F1-score was used as an indicator of performance stability, while for regression models the gap between R² and Adjusted R² was analyzed to evaluate potential overfitting. The resulting visualizations provided additional insight into the balance between predictive accuracy and model complexity.
 
 Together, these steps created a comprehensive evaluation framework that combined performance measurement, visual analysis, statistical validation, and generalization assessment to support reliable model comparison and selection.
+
+
+Note on Shape Analysis and Robustness Testing
+
+The Shape Analysis and Robustness Testing steps were not performed in this project due to the large size and complexity of the dataset. Executing these processes requires significant computational resources that exceed the capabilities of the available hardware. Nevertheless, all other project stages were completed and thoroughly documented, and the corresponding implementation details and results are provided within the code and report
 
