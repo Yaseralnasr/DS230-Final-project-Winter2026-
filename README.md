@@ -31,6 +31,48 @@ Outlier handling was performed using percentile-based clipping techniques, while
 Relationships among numerical variables were investigated using a Correlation Heatmap, and the strongest positive and negative correlations with log shares were identified. Additional analyses were conducted to evaluate the impact of several factors on article popularity, including:Day of publicationWeekend versus weekday publishingContent categorySentiment and subjectivity featuresLDA topic distributions
 Furthermore, Pair plots and Density Plots were used to explore feature relationships and distribution patterns.Finally, binary popularity labels were created using both Median and 75th Percentile (Q75) thresholds, and class balance was analyzed to support future classification modeling.
 
+1. Data Preparation and Preprocessing
+
+The dataset was loaded and cleaned, and a target variable (Popular) was created based on the median number of article shares. Articles were classified into Popular and Not Popular categories. The features and target variable were separated, and the dataset was split into training (80%) and testing (20%) sets while preserving class balance. StandardScaler was applied where necessary to improve model performance.
+
+2. Hyperparameter Tuning
+
+GridSearchCV and RandomizedSearchCV were used to optimize several machine learning models by identifying the best hyperparameter combinations.
+
+Final Results After Tuning
+
+Model	Accuracy	F1-Score	AUC
+XGBoost	0.6646	0.7018	0.7245
+Random Forest	0.6696	0.7011	0.7313
+Logistic Regression	0.6483	0.6773	0.7053
+Decision Tree	0.6467	0.6639	0.6907
+KNN	0.6398	0.6564	0.6942
+3. Hyperparameter Analysis
+
+A heatmap was used to visualize the Logistic Regression tuning results. The best performance was achieved using L1 regularization with C = 0.01, producing the highest cross-validation F1-score.
+
+4. Model Comparison
+
+The comparison revealed that:
+
+XGBoost achieved the highest F1-score (0.7018).
+Random Forest achieved the highest Accuracy (0.6696).
+Random Forest achieved the highest AUC (0.7313).
+KNN and Decision Tree showed comparatively lower performance.
+5. Best Model Evaluation
+
+XGBoost was selected as the final model because it provided the best balance across all evaluation metrics.
+
+The confusion matrix demonstrated that the model successfully classified a large number of instances from both classes. The classification report indicated balanced Precision and Recall values, achieving:
+
+Accuracy = 0.66
+F1-Score = 0.7018
+Precision (Popular) = 0.67
+Recall (Popular) = 0.74
+Conclusion
+
+The results demonstrate that ensemble learning methods, particularly XGBoost and Random Forest, outperformed traditional machine learning models in predicting article popularity. Among all evaluated models, XGBoost achieved the strongest overall performance and was therefore selected as the final predictive model for this study.
+
 # Classification Models Results and Discussion
 
 To predict article popularity, several classification algorithms were trained and evaluated, including Logistic Regression, K-Nearest Neighbors (KNN), Decision Tree, Random Forest, Linear Support Vector Machine (Linear SVM), and RBF Support Vector Machine (RBF SVM).
