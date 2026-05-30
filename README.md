@@ -204,3 +204,183 @@ Final dataset characteristics:
 
 The dataset was successfully prepared for classification and predictive modeling tasks.
 
+
+Feature Engineering and Feature Selection
+1. Feature Engineering
+
+To improve the predictive power of the dataset, several new features were generated from the original variables. The objective was to capture hidden relationships, reduce skewness, and create more informative representations of article characteristics.
+
+1.1 Keyword-Based Features
+
+Several features were created to measure keyword density and keyword interactions:
+
+keyword_density
+kw_avg_min
+kw_avg_max
+kw_avg_avg
+
+These variables combine keyword statistics and article content information to better represent topic relevance and content richness.
+
+1.2 Sentiment Features
+
+Additional sentiment-related variables were generated, including:
+
+sentiment_score
+polarity_ratio
+
+These features summarize the emotional characteristics of articles and provide a more compact representation of sentiment information.
+
+1.3 Temporal Features
+
+New time-related features were generated, such as:
+
+is_weekend
+weekday_is_saturday
+weekday_is_sunday
+
+These variables were created to capture the effect of publication timing on article popularity.
+
+1.4 Logarithmic Transformations
+
+Because many variables showed highly skewed distributions, logarithmic transformations were applied to selected features, including:
+
+log_num_imgs
+log_num_videos
+log_kw_avg_avg
+
+The transformation reduced skewness and improved feature distributions, making them more suitable for machine learning algorithms.
+
+2. Analysis of Engineered Features
+
+Histograms and scatter plots were used to examine the distributions of the newly created features and their relationships with the target variable.
+
+The analysis revealed that:
+
+Most engineered variables remained right-skewed but showed improved distributions after logarithmic transformation.
+Keyword-related features demonstrated stronger relationships with article popularity than many original variables.
+Sentiment-based features showed moderate predictive potential.
+Weekend publication indicators appeared to influence article popularity.
+
+After feature engineering, the total number of features increased from 59 to 75 features, resulting in a richer representation of the dataset.
+
+3. Feature Selection
+
+Three different feature selection techniques were applied to identify the most relevant predictors.
+
+3.1 Correlation-Based Feature Selection
+
+Pearson correlation coefficients were calculated between each feature and the target variable (popular).
+
+Features with absolute correlation greater than 0.05 were retained.
+
+Results:
+
+Selected Features: 37
+Most correlated variables included:
+log_kw_avg_avg
+kw_avg_avg
+LDA_02
+data_channel_is_world
+is_weekend
+kw_max_avg
+global_subjectivity
+
+The highest correlation was observed for log_kw_avg_avg (approximately 0.20).
+
+3.2 Random Forest Feature Importance
+
+A Random Forest classifier was trained to evaluate feature importance based on ensemble tree learning.
+
+Results:
+
+Selected Features: 23
+Most important variables:
+log_kw_avg_avg
+log_kw_min_avg
+log_kw_avg_avg
+is_weekend
+LDA_02
+kw_min_avg
+data_channel_is_entertainment
+
+The Random Forest method highlighted several non-linear relationships that were not fully captured by correlation analysis.
+
+3.3 Recursive Feature Elimination (RFE)
+
+Recursive Feature Elimination was performed using Logistic Regression as the base estimator.
+
+Results:
+
+Selected Features: 30
+Top-ranked variables:
+log_kw_avg_avg
+kw_num_avg
+log_kw_min_content
+weekday_is_sunday
+global_subjectivity
+keyword_density
+
+RFE successfully identified features that contributed most to classification performance while removing redundant variables.
+
+4. Comparison of Feature Selection Methods
+
+The number of selected features obtained from each method is summarized below:
+
+Method	Selected Features
+Correlation Analysis	37
+Random Forest	23
+RFE	30
+
+Only 15 features were selected by all three methods simultaneously.
+
+The common features included:
+
+log_kw_avg_avg
+LDA_02
+LDA_04
+is_weekend
+data_channel_is_entertainment
+data_channel_is_tech
+global_subjectivity
+keyword_density
+kw_min_avg
+kw_avg_avg
+
+These features were considered the most reliable predictors of article popularity.
+
+5. Principal Component Analysis (PCA)
+
+PCA was performed to investigate the intrinsic dimensionality of the dataset.
+
+Results:
+
+The first two principal components explained approximately 22.95% of the total variance.
+Approximately 30 components were required to explain 90% of the variance.
+Approximately 36 components were required to explain 95% of the variance.
+
+These findings indicate that article popularity depends on multiple interacting factors rather than a small number of dominant variables.
+
+6. Final Feature Set
+
+Based on the combined results of Correlation Analysis, Random Forest, and RFE, a final set of 15 highly informative features was selected.
+
+Top features included:
+
+log_kw_avg_avg
+kw_avg_avg
+LDA_02
+is_weekend
+kw_min_avg
+kw_subjectivity
+data_channel_is_socmed
+data_channel_is_entertainment
+weekday_is_saturday
+global_subjectivity
+data_channel_is_tech
+log_kw_min_avg
+log_kw_max_avg
+LDA_01
+LDA_00
+
+The final engineered dataset contained 39,642 observations and 81 columns, including the target variable, and was prepared for the model-building phase.
+
