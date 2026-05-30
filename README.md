@@ -915,3 +915,13 @@ Cross-validation and statistical testing further confirmed the robustness of XGB
 
 The final engineered dataset contained 39,642 observations and 81 columns, including the target variable, and was prepared for the model-building phase.
 
+The analysis began by loading the classification and regression evaluation results from the generated metrics files. The performance of all developed models was then reviewed using a variety of evaluation measures. For classification models, metrics such as Accuracy, Precision, Recall, F1-Score, AUC, and Brier Score were examined, while regression models were evaluated using MAE, RMSE, R², and Adjusted R².
+
+After reviewing the numerical results, visual comparison charts were created to provide a clearer interpretation of model performance. Separate bar charts were generated for classification and regression tasks, allowing the models to be ranked and compared across all evaluation metrics.
+
+To further validate the findings, statistical significance tests were conducted. The best classification model, identified based on its AUC score, was compared with the remaining models using both the Paired t-test and the Wilcoxon Signed-Rank Test. This step helped determine whether the observed performance differences were statistically significant rather than occurring by chance.
+
+Finally, a bias–variance analysis was performed to assess model generalization. For classification models, the difference between AUC and F1-score was used as an indicator of performance stability, while for regression models the gap between R² and Adjusted R² was analyzed to evaluate potential overfitting. The resulting visualizations provided additional insight into the balance between predictive accuracy and model complexity.
+
+Together, these steps created a comprehensive evaluation framework that combined performance measurement, visual analysis, statistical validation, and generalization assessment to support reliable model comparison and selection.
+
